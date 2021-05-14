@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test app</title>
+
+</head>
+
+<body onload="fetchData()">
+    <h2>Test App</h2>
+    <div id="status"></div>
+    <div id="container"></div>
+
+    <script>
+        const html = {
+            container: document.getElementById("container"),
+            status: document.getElementById("status")
+        }
+
+        async function fetchData() {
+            try {
+                const response = await fetch(`http://localhost/posts`)
+                const data = await response.json()
+
+                data.forEach(row => {
+                    const title = document.createElement("div")
+                    title.innerText = `${row.body} - ${row.content}`
+                    html.container.appendChild(title)
+                })
+            } catch (error) {
+                html.status.textContent = error.message
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+version: '3.9'
+services: 
+    app:
+        build:
+            context: .
+        environment:
+            - DB_USER=${DB_ADMIN_USERNAME}
+            - DB_PASS=${DB_ADMIN_PASSWORD}
+        depends_on: 
+            - db
+    db:
+        image: mongo
+        volumes: 
+            - test-app-db:/data/db
+        environment: 
+            - MONGO_INITDB_ROOT_USERNAME=${DB_ADMIN_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${DB_ADMIN_PASSWORD}
+    lb:
+        image: nginx
+        ports: 
+            - 80:80
+        volumes:
+            - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+        depends_on: 
+            - app
+
+volumes:
+    test-app-db:

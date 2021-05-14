@@ -1,0 +1,11 @@
+.dockerignore
+Dockerfile
+docker-compose*
+
+.env
+
+.gitignore
+.git
+
+tmp
+app/node_modules
