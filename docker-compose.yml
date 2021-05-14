@@ -3,6 +3,7 @@ services:
     app:
         build:
             context: .
+        image: gerr0r/test-app
         environment:
             - DB_USER=${DB_ADMIN_USERNAME}
             - DB_PASS=${DB_ADMIN_PASSWORD}
