@@ -1,6 +1,13 @@
 version: '3.9'
 services: 
     app:
+        deploy:
+            replicas: 4
+            restart_policy: 
+                condition: any
+            update_config:
+                parallelism: 2
+                delay: 10s
         build:
             target: production
         environment:
